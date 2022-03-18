@@ -6,8 +6,8 @@
 
 <h3>Pimoroni wireless pinout:</h3>
 
-![Pimoroni wireless pinout](https://github.com/sjefferson99/Boatman-pico-wireless-hub/blob/2-pico-pinout-for-wireless-hub/Pico%20wireless%20pack%20pinout.png)
+![Pimoroni wireless pinout](https://github.com/sjefferson99/Boatman-pico-wireless-hub/blob/main/Pico%20wireless%20pack%20pinout.png)
 
 <h3>Custom extra connections pinout:</h3>
 
-![Custom extra connections pinout](https://github.com/sjefferson99/Boatman-pico-wireless-hub/blob/2-pico-pinout-for-wireless-hub/Wireless%20Hub%20PICO%20Pinout.drawio.png)
+![Custom extra connections pinout](https://github.com/sjefferson99/Boatman-pico-wireless-hub/blob/main/Wireless%20Hub%20PICO%20Pinout.drawio.png)
