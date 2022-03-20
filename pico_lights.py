@@ -57,8 +57,8 @@ class pico_light_controller:
         data = []
         data.append(command_byte)
         self.send_data(data)        
-        #Expect 2 byte length data return
-        returnData = self.i2c1.readfrom(self.I2C_address, 2)
+        #Expect 1 byte length data return
+        returnData = self.i2c1.readfrom(self.I2C_address, 1)
         length = int.from_bytes(returnData, "big")
         #Expect immediate send of the version string, byte count specified above
         returnData = self.i2c1.readfrom(self.I2C_address, length)
