@@ -1,6 +1,7 @@
 #Pico will need to be flashed with Pimoroni micropython for display support
 #https://github.com/pimoroni/pimoroni-pico
 
+from usys import version
 from utime import sleep_ms
 from machine import Pin, I2C
 from pico_lights import pico_light_controller
@@ -66,9 +67,10 @@ if pico_lights_enable:
     
     if lights.check_bus():
         debug("Pico lights controller found on bus")
-
+        
+        debug("Lights local library version: {}".format(lights.version))
         lights_module_version = lights.get_version()
-        debug("Lights version: {}".format(lights_module_version))
+        debug("Lights module version: {}".format(lights_module_version))
     
         if lights_module_version != lights.version:
             debug("Lights module version does not equal hub lights module version, disabling lights module, please upgrade hub and module to same version")
