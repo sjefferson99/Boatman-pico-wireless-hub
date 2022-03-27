@@ -24,7 +24,7 @@ class pico_light_controller:
     def __init__(self, I2Ccontroller: I2C, address: int = 0x41) -> None:
         self.i2c1 = I2Ccontroller
         self.I2C_address = address
-        self.version = str("0.2.0")
+        self.version = str("0.3.0")
         self.moduleID = 0b00000010
         self.led_groups = {}
         self.set_light_bits = 0b01000000
