@@ -1,12 +1,20 @@
-#Pico will need to be flashed with Pimoroni micropython for display support
-#https://github.com/pimoroni/pimoroni-pico
+# Pico will need to be flashed with Pimoroni micropython for display support
+# https://github.com/pimoroni/pimoroni-pico
+
+# Version 0.3.0
 
 from usys import version
 from utime import sleep_ms
 from machine import Pin, I2C
 from pico_lights import pico_light_controller
+from debug import debugger
 import _thread
 import time
+
+debugEnable = True #Enables printing debug messages and debug slowdown behaviour
+debugVerbosity = 0 #0=basic debug messages, 1=most debug messages, 2=all debug messages. >0 adds 1 second sleep in program loop
+
+debug = debugger(debugVerbosity, debugEnable)
 
 try:
     import ppwhttp
@@ -17,22 +25,6 @@ r = 0
 g = 0
 b = 0
 
-#########
-# Debug #
-#########
-#Deals with debug messages appropriately
-def debug(message, verbosity = 0):
-    #TODO Support UART output (unsure if toggle signalk/debug or put debug into signalk format)
-    if debug_enable and verbosity <= debug_verbosity:
-        print(message)
-
-#Enables printing debug messages
-global debug_enable
-debug_enable = True
-
-global debug_verbosity
-debug_verbosity = 0 #0=basic debug messages, 1=most debug messages, 2=all debug messages. >0 adds 1 second sleep in program loop
-
 ################
 # Board config #
 ################
@@ -42,7 +34,7 @@ scl1 = Pin(15)
 i2c1_freq = 100000
 
 # Init I2C
-debug("Init I2C")
+debug.print("Init I2C")
 i2c1 = I2C(1, sda=sda1, scl=scl1, freq=i2c1_freq)
 
 ################
@@ -53,40 +45,40 @@ pico_lights_enable = True
 pico_lights_address = 0x41
 
 #Scan i2C bus for devices
-debug('i2c1 devices found at')
+debug.print('i2c1 devices found at')
 devices = i2c1.scan()
 if devices:
     for i in devices:
-        debug(i)
+        debug.print(str(i))
 
 #Init light controller module
 if pico_lights_enable:
-    debug("Pico light module enabled")
+    debug.print("Pico light module enabled")
     lights = pico_light_controller(i2c1, pico_lights_address)
-    debug(lights.I2C_address)
+    debug.print(str(lights.I2C_address))
     
     if lights.check_bus():
-        debug("Pico lights controller found on bus")
+        debug.print("Pico lights controller found on bus")
         
-        debug("Lights local library version: {}".format(lights.version))
+        debug.print("Lights local library version: {}".format(lights.version))
         lights_module_version = lights.get_version()
-        debug("Lights module version: {}".format(lights_module_version))
+        debug.print("Lights module version: {}".format(lights_module_version))
     
         if lights_module_version != lights.version:
-            debug("Lights module version does not equal hub lights module version, disabling lights module, please upgrade hub and module to same version")
+            debug.print("Lights module version does not equal hub lights module version, disabling lights module, please upgrade hub and module to same version")
             pico_lights_enable = False
         else:
-            debug("Lights hub version matches module version")
+            debug.print("Lights hub version matches module version")
             #Load group config from lights module
-            debug("Loading group config from lights module")
+            debug.print("Loading group config from lights module")
             lights.get_groups() #type: ignore
 
     else:
-        debug("Pico lights controller not found on bus, disabling module")
+        debug.print("Pico lights controller not found on bus, disabling module")
         pico_lights_enable = False
 
 else:
-    debug("No I2C devices found")
+    debug.print("No I2C devices found")
 
 ########################
 # Webserver definition #
