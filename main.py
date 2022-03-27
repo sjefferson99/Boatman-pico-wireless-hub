@@ -3,13 +3,12 @@
 
 # Version 0.3.0
 
-from usys import version
 from utime import sleep_ms
 from machine import Pin, I2C
 from pico_lights import pico_light_controller
 from debug import debugger
 import _thread
-import time
+
 
 debugEnable = True #Enables printing debug messages and debug slowdown behaviour
 debugVerbosity = 0 #0=basic debug messages, 1=most debug messages, 2=all debug messages. >0 adds 1 second sleep in program loop
@@ -114,7 +113,7 @@ def server_loop_forever():
    server_sock = ppwhttp.start_server()
    while True:
        ppwhttp.handle_http_request(server_sock)
-       time.sleep(0.01)
+       sleep_ms(10)
 
 #Handle the server polling loop on the other core
 _thread.start_new_thread(server_loop_forever, ())
@@ -122,4 +121,4 @@ _thread.start_new_thread(server_loop_forever, ())
 #Main program loop
 while True:
     print("Looping")
-    time.sleep(5.0)
+    sleep_ms(5000)
