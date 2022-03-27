@@ -1,8 +1,8 @@
-# Boatman-pico-wireless-hub
+# Boatman Pico wireless hub v0.3.0
 
 <h2>Pico Pinout</h2>
 
-<p>The Boatman wireless hub module combines the Pimoroni wireless pack, which is designed to be mounted directly on to the Pico and further custom connections. These two diagrams should be combined to understand all the physical connections to the Pico pins when creating a circuit board. Care should be taken to not connect to GPIO etc that is already in use ont he wireless hat.</p>
+<p>The Boatman wireless hub module combines the Pimoroni wireless pack, which is designed to be mounted directly on to the Pico and further custom connections. These two diagrams should be combined to understand all the physical connections to the Pico pins when creating a circuit board. Care should be taken to not connect to GPIO etc that is already in use on the wireless hat.</p>
 
 <h3>Pimoroni wireless pinout:</h3>
 
